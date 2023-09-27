@@ -30,7 +30,7 @@ public class ScoreController : MonoBehaviour
         try
         {
             scoreText.SetText(score + GameManager.Instance.getScore());
-            ammoText.SetText(ammo + GameManager.Instance.ammoNumberGlobal);
+            ammoText.SetText(ammo + GameManager.Instance.AmmoNumberGlobal);
         }
         catch (Exception)
         {

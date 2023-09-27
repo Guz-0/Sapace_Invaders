@@ -57,9 +57,9 @@ public class SceneManagerScript : MonoBehaviour
                 asyncLoad.allowSceneActivation = true;
                 StartCoroutine(stopLoadingScreen());
                 Debug.Log("COMPLETED2");
-                GameManager.Instance.highScore = 0;
-                GameManager.Instance.numberOfRounds = 0;
-                GameManager.Instance.maxMoveTime = GameManager.Instance.maxMoveTimeFirst;
+                GameManager.Instance.HighScore = 0;
+                GameManager.Instance.NumberOfRounds = 0;
+                GameManager.Instance.MaxMoveTime = GameManager.Instance.MaxMoveTimeFirst;
             }
 
             /*if(totalProgress >= 1f)

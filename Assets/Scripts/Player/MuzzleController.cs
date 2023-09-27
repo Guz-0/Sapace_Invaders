@@ -22,7 +22,7 @@ public class MuzzleController : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.ammoNumberGlobal = ammoNumber;
+        GameManager.Instance.AmmoNumberGlobal = ammoNumber;
     }
 
     
@@ -76,17 +76,21 @@ public class MuzzleController : MonoBehaviour
         if(collision.gameObject.tag == "X2AMMO")
         {
             ammoNumber = 2;
-            GameManager.Instance.ammoNumberGlobal = ammoNumber;
+            GameManager.Instance.AmmoNumberGlobal = ammoNumber;
             Destroy(collision.gameObject);
             SoundManager.Instance.PlaySound(pickupClip1);
         }
         if(collision.gameObject.tag == "X3AMMO")
         {
             ammoNumber = 3;
-            GameManager.Instance.ammoNumberGlobal = ammoNumber;
+            GameManager.Instance.AmmoNumberGlobal = ammoNumber;
             Destroy(collision.gameObject);
             SoundManager.Instance.PlaySound(pickupClip2);
         }
+    }
+
+    private void updateGloabalAmmoNumber()
+    {
 
     }
 }

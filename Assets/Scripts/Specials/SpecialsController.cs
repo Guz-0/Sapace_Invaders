@@ -8,26 +8,23 @@ public class SpecialsController : MonoBehaviour
     [SerializeField] private GameObject x2Ammo;
     [SerializeField] private GameObject x3Ammo;
 
-    [SerializeField] private int minSec;
-    [SerializeField] private int maxSec;
-    private float waitTime = 0;
+    [SerializeField] private int minSecAmmo;
+    [SerializeField] private int maxSecAmmo;
+    [SerializeField] private float specialSpeedAmmo = 1f;
+    private float waitTimeAmmo = 0f;
+    private float actualWaitTimeAmmo;
 
     [SerializeField] private int round2Ammo;
     [SerializeField] private int round3Ammo;
 
     [SerializeField] private GameObject asteroidObj;
-    [SerializeField] private float specialSpeedAsteroid;
     [SerializeField] private float minSecAsteroid;
-    [SerializeField] private float maxSexAsteroid;
+    [SerializeField] private float maxSecAsteroid;
+    [SerializeField] private float specialSpeedAsteroid;
+    private float waitTimeAsteroid = 0f;
+    private float actualWaitTimeAsteroid;
 
-    [SerializeField] private float specialSpeedAmmo = 1f;
-    private float resultSec;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+   
     void Update()
     {
         spawnRandom();
@@ -35,52 +32,66 @@ public class SpecialsController : MonoBehaviour
 
     void spawnRandom()
     {
-        if(waitTime == 0)
+        if(waitTimeAmmo == 0)
         {
-            resultSec = UnityEngine.Random.Range(minSec, maxSec);
+            actualWaitTimeAmmo = UnityEngine.Random.Range(minSecAmmo, maxSecAmmo);
+        }
+        if(waitTimeAsteroid == 0)
+        {
+            actualWaitTimeAsteroid = UnityEngine.Random.Range(minSecAsteroid, maxSecAsteroid);
         }
         
-        waitTime += Time.deltaTime;
-        if(waitTime >= resultSec)
+        waitTimeAmmo += Time.deltaTime;
+        waitTimeAsteroid += Time.deltaTime;
+
+        if(waitTimeAmmo >= actualWaitTimeAmmo)
         {
-            if(GameManager.Instance.numberOfRounds >= round2Ammo)
+            if(GameManager.Instance.NumberOfRounds >= round2Ammo)
             {
                 
-                if(GameManager.Instance.numberOfRounds < round3Ammo)
+                if(GameManager.Instance.NumberOfRounds < round3Ammo)
                 {
-                    whichAmmo(x2Ammo);
+                    WhichObjectToSpawn(x2Ammo, specialSpeedAmmo);
                 }
-                else if(GameManager.Instance.numberOfRounds >= round3Ammo)
+                else if(GameManager.Instance.NumberOfRounds >= round3Ammo)
                 {
                     if (UnityEngine.Random.Range(0, 2) == 1)
                     {
-                        whichAmmo(x2Ammo);
+                        WhichObjectToSpawn(x2Ammo, specialSpeedAmmo);
                     }
                     else
                     {
-                        whichAmmo(x3Ammo);
+                        WhichObjectToSpawn(x3Ammo, specialSpeedAmmo);
                     }
                 }
             }
             
 
         }
+
+        if(waitTimeAsteroid >= actualWaitTimeAsteroid)
+        {
+            WhichObjectToSpawn(asteroidObj, specialSpeedAsteroid);
+            
+        }
     }
 
-    void whichAmmo(GameObject ammo)
+    void WhichObjectToSpawn(GameObject obj, float specialSpeed)
     {
         float randX = UnityEngine.Random.Range(-8.5f, 8.5f);
-        var special = Instantiate(ammo, new Vector2(randX, transform.position.y), transform.rotation);
-        special.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, specialSpeedAmmo * -1);
+        var special = Instantiate(obj, new Vector2(randX, transform.position.y), transform.rotation);
+        special.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, specialSpeed * -1);
 
-        waitTime = 0;
-        Debug.Log("SPAWNED SPECIAL");
+        if (special.CompareTag("ASTEROID"))
+        {
+            this.waitTimeAsteroid = 0f;
+            //this.minSecAsteroid -= 1f;
+            //this.maxSecAsteroid -= 1f;
+        }
+        else
+        {
+            this.waitTimeAmmo = 0f;
+        }
+        Debug.Log("SPAWNED SPECIAL: " + special.name);
     }
-
-    void spawnAsteroid(GameObject asteroid)
-    {
-        /*
-        float waitTimeAst =;
-        waitTimeAst += Time.deltaTime;
-        */}
 }

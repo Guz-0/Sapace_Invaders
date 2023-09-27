@@ -8,6 +8,7 @@ TagManager:
   - ENEMYGROUP
   - X3AMMO
   - X2AMMO
+  - ASTEROID
   layers:
   - Default
   - TransparentFX

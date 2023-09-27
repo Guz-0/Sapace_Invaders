@@ -2987,9 +2987,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highScore: 0
   numberOfRounds: 0
-  maxMoveTimeFirst: 1
+  maxMoveTimeFirst: 1.2
   maxMoveTime: 0
-  maxDivisor: 0.15
+  maxDivisor: 0.2
   ammoNumberGlobal: 0
 --- !u!1 &1568277312
 GameObject:

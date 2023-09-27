@@ -21,7 +21,7 @@ public class EnemyGroupController : MonoBehaviour
         GameManager.Instance.addNumberOfRounds();
         currentPosition = transform.position;
         maxMoveTime = GameManager.Instance.getMaxMoveTime();
-        Debug.Log(GameManager.Instance.numberOfRounds + " - " + maxMoveTime.ToString());
+        Debug.Log(GameManager.Instance.NumberOfRounds + " - " + maxMoveTime.ToString());
 
     }
 

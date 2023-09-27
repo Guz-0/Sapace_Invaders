@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioClip shootingClip;
 
-    private int numberAmmo = 1;
     [SerializeField] private GameObject muzzle;
 
     void Start()
